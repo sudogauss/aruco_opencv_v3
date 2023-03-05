@@ -121,7 +121,7 @@ void MarkerDetector::detect(const cv::Mat &input, vector< Marker > &detectedMark
 //omp_set_num_threads(1);
     // it must be a 3 channel image
     if (input.type() == CV_8UC3)
-        cv::cvtColor(input, grey, CV_BGR2GRAY);
+        cv::cvtColor(input, grey, COLOR_BGR2GRAY);
     else
         grey = input;
 
@@ -220,7 +220,7 @@ void MarkerDetector::detect(const cv::Mat &input, vector< Marker > &detectedMark
 
 
           if (_params._cornerMethod == SUBPIX) {
-            cornerSubPix(grey, Corners, cvSize(_params._subpix_wsize, _params._subpix_wsize), cvSize(-1, -1), cvTermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 12, 0.005));
+            cornerSubPix(grey, Corners, Size(_params._subpix_wsize, _params._subpix_wsize), Size(-1, -1), TermCriteria(TermCriteria::MAX_ITER | TermCriteria::EPS, 12, 0.005));
         }
         // copy back
         for (unsigned int i = 0; i < detectedMarkers.size(); i++)
@@ -316,7 +316,7 @@ void MarkerDetector::detectRectangles(vector< cv::Mat > &thresImgv, vector< Mark
         std::vector< std::vector< cv::Point > > contours2;
         cv::Mat thres2;
         thresImgv[img_idx].copyTo(thres2);
-        cv::findContours(thres2, contours2, hierarchy2, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+        cv::findContours(thres2, contours2, hierarchy2, RETR_LIST, CHAIN_APPROX_NONE);
         vector< Point > approxCurve;
         /// for each contour, analyze if it is a paralelepiped likely to be the marker
         for (unsigned int i = 0; i < contours2.size(); i++) {
@@ -512,7 +512,7 @@ void MarkerDetector::thresHold(int method, const Mat &grey, Mat &out, double par
         throw cv::Exception(9001, "grey.type()!=CV_8UC1", "MarkerDetector::thresHold", __FILE__, __LINE__);
     switch (method) {
     case FIXED_THRES:
-        cv::threshold(grey, out, param1, 255, CV_THRESH_BINARY_INV);
+        cv::threshold(grey, out, param1, 255, THRESH_BINARY_INV);
         break;
     case ADPT_THRES: // currently, this is the best method
         // ensure that _thresParam1%2==1
@@ -1041,10 +1041,10 @@ void MarkerDetector::drawApproxCurve(Mat &in, vector< Point > &contour, Scalar c
 
 void MarkerDetector::draw(Mat out, const vector< Marker > &markers) {
     for (unsigned int i = 0; i < markers.size(); i++) {
-        cv::line(out, markers[i][0], markers[i][1], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][1], markers[i][2], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][2], markers[i][3], cvScalar(255, 0, 0), 2, CV_AA);
-        cv::line(out, markers[i][3], markers[i][0], cvScalar(255, 0, 0), 2, CV_AA);
+        cv::line(out, markers[i][0], markers[i][1], Scalar(255, 0, 0), 2, LINE_AA);
+        cv::line(out, markers[i][1], markers[i][2], Scalar(255, 0, 0), 2, LINE_AA);
+        cv::line(out, markers[i][2], markers[i][3], Scalar(255, 0, 0), 2, LINE_AA);
+        cv::line(out, markers[i][3], markers[i][0], Scalar(255, 0, 0), 2, LINE_AA);
     }
 }
 /* Attempt to make it faster than in opencv. I could not :( Maybe trying with SSE3...
