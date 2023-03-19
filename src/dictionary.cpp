@@ -60,7 +60,7 @@ Dictionary Dictionary::loadPredefined(std::string type){
     return loadPredefined(getTypeFromString(type));
 }
 
-Dictionary Dictionary::loadPredefined(DICT_TYPES type)throw (cv::Exception){
+Dictionary Dictionary::loadPredefined(DICT_TYPES type){
     Dictionary d;
     switch(type){
          case ARUCO:{
@@ -275,7 +275,7 @@ return {   "ARUCO","ARUCO_MIP_16h3","ARUCO_MIP_25h7","ARUCO_MIP_36h12", "ARTOOLK
 
 }
 
-MarkerMap  Dictionary::createMarkerMap( cv::Size gridSize,int MarkerSize,int MarkerDistance, const std::vector<int> &ids,bool chess_board) throw (cv::Exception){
+MarkerMap  Dictionary::createMarkerMap( cv::Size gridSize,int MarkerSize,int MarkerDistance, const std::vector<int> &ids,bool chess_board) {
     if (gridSize.height*gridSize.width!=int(ids.size()))throw cv::Exception(9001, "gridSize != ids.size()Invalid ", "Dictionary::createMarkerMap", __FILE__, __LINE__);
     MarkerMap TInfo;
 
