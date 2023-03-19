@@ -294,7 +294,7 @@ void MarkerMap::getIdList(std::vector< int > &ids, bool append) const {
         ids.push_back(at(i).id);
 }
 
-MarkerMap   MarkerMap::convertToMeters(float markerSize_meters)throw (cv::Exception){
+MarkerMap   MarkerMap::convertToMeters(float markerSize_meters){
 
     if (!isExpressedInPixels())
         throw cv::Exception(-1,"The board is not expressed in pixels",  "MarkerMap::convertToMeters", __FILE__, __LINE__);
@@ -311,7 +311,7 @@ MarkerMap   MarkerMap::convertToMeters(float markerSize_meters)throw (cv::Except
         }
     return BInfo;
 }
-cv::Mat MarkerMap::getImage(float METER2PIX)const throw (cv::Exception){
+cv::Mat MarkerMap::getImage(float METER2PIX)const {
 
     if (mInfoType==NONE)
         throw cv::Exception(-1,"The board is not valid mInfoType==NONE  ",  "MarkerMap::getImage", __FILE__, __LINE__);
