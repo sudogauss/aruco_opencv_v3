@@ -57,19 +57,19 @@ public:
     MarkerMap  createMarkerMap( cv::Size gridSize,int MarkerSize,int MarkerDistance, const std::vector<int> &Ids,bool chess_board=false) throw (cv::Exception);
 
 
-    static Dictionary loadPredefined(DICT_TYPES type) throw(cv::Exception);
-    static Dictionary loadPredefined(std::string type) throw(cv::Exception);
+    static Dictionary loadPredefined(DICT_TYPES type) ;
+    static Dictionary loadPredefined(std::string type) ;
     //io functions
-    void saveToFile(std::string file)throw(cv::Exception);
-    void readFromFile(std::string file)throw(cv::Exception);
-    void saveToStream(std::ostream & str)throw(cv::Exception);
-    void readFromStream(std::istream &str)throw(cv::Exception);
+    void saveToFile(std::string file);
+    void readFromFile(std::string file);
+    void saveToStream(std::ostream & str);
+    void readFromStream(std::istream &str);
 
 
 
     //given a string,returns the type
-    static DICT_TYPES getTypeFromString(std::string str)  throw(cv::Exception);
-    static std::string getTypeString(DICT_TYPES t)   throw(cv::Exception);
+    static DICT_TYPES getTypeFromString(std::string str)  ;
+    static std::string getTypeString(DICT_TYPES t)   ;
     static std::vector<std::string> getDicTypes() ;
 private:
 

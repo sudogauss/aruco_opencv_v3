@@ -10,20 +10,20 @@
 using namespace std;
 namespace aruco{
 
-void Dictionary::saveToFile(std::string file)throw(cv::Exception){
+void Dictionary::saveToFile(std::string file){
     std::ofstream f(file.c_str(),std::ios::binary);
     if(!f) cv::Exception(9001, "Could not open file:"+file, "Dictionary::saveToFile", __FILE__, __LINE__);
      f<<"aruco_dictionary 1.0\n";
     saveToStream(f);
 }
-void Dictionary::saveToStream(std::ostream & str)throw(cv::Exception){
+void Dictionary::saveToStream(std::ostream & str){
 str<<_nbits<<" "<<_tau<<" "<<_code_id.size()<<std::endl;
     for(auto it:_code_id )
         str<<it.first<<" "<<it.second<<std::endl;
 
 
 }
-void Dictionary::readFromFile(std::string file)throw(cv::Exception){
+void Dictionary::readFromFile(std::string file){
     std::ifstream f(file.c_str(),std::ios::binary);
     if(!f)cv::Exception(9001, "Could not open file:"+file, "Dictionary::readFromFile", __FILE__, __LINE__);
     string sig;sig.resize(16);
@@ -38,7 +38,7 @@ void Dictionary::readFromFile(std::string file)throw(cv::Exception){
 
 
 
-void Dictionary::readFromStream(std::istream &str)throw(cv::Exception){
+void Dictionary::readFromStream(std::istream &str){
     uint64_t code;int id;
     _code_id.clear();
     uint64_t s;
@@ -55,7 +55,7 @@ void Dictionary::fromVector(const vector<uint64_t> &codes,std::map<uint64_t,uint
 	for(auto c:codes) 	code_id_map.insert( make_pair(c,id++));
 	
 }
-Dictionary Dictionary::loadPredefined(std::string type)throw(cv::Exception){
+Dictionary Dictionary::loadPredefined(std::string type){
 
     return loadPredefined(getTypeFromString(type));
 }
@@ -232,7 +232,7 @@ cv::Mat Dictionary::getMarkerImage_id(int id,int bit_size,bool addWaterMark){
 }
 
 
-std::string Dictionary::getTypeString(DICT_TYPES t)  throw(cv::Exception){
+std::string Dictionary::getTypeString(DICT_TYPES t)  {
     switch(t){
     case ARUCO:return "ARUCO";break;
     case ARUCO_MIP_16h3:return "ARUCO_MIP_16h3";break;
@@ -252,7 +252,7 @@ std::string Dictionary::getTypeString(DICT_TYPES t)  throw(cv::Exception){
     throw cv::Exception(9001, "Invalid Dictionary type to convert to string", "Dictionary::getTypeString", __FILE__, __LINE__);
 }
 
-Dictionary::DICT_TYPES Dictionary::getTypeFromString(std::string str)   throw(cv::Exception){
+Dictionary::DICT_TYPES Dictionary::getTypeFromString(std::string str)   {
     if (str=="ARUCO") return ARUCO;
     if (str=="ARUCO_MIP_16h3") return ARUCO_MIP_16h3;
     if (str=="ARUCO_MIP_25h7") return ARUCO_MIP_25h7;

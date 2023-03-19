@@ -76,13 +76,13 @@ MarkerDetector::~MarkerDetector() {}
  *
  ************************************/
 
-std::vector<aruco::Marker> MarkerDetector::detect(const cv::Mat &input ) throw(cv::Exception) {
+std::vector<aruco::Marker> MarkerDetector::detect(const cv::Mat &input )  {
     std::vector< Marker >  detectedMarkers;
     detect(input,detectedMarkers);
     return detectedMarkers;
 }
 
-std::vector<aruco::Marker> MarkerDetector::detect(const cv::Mat &input,const CameraParameters &camParams, float markerSizeMeters , bool setYPerperdicular ) throw(cv::Exception){
+std::vector<aruco::Marker> MarkerDetector::detect(const cv::Mat &input,const CameraParameters &camParams, float markerSizeMeters , bool setYPerperdicular ) {
     std::vector< Marker >  detectedMarkers;
     detect(input,detectedMarkers,camParams,markerSizeMeters,setYPerperdicular);
     return detectedMarkers;
@@ -96,7 +96,7 @@ std::vector<aruco::Marker> MarkerDetector::detect(const cv::Mat &input,const Cam
  *
  ************************************/
 void MarkerDetector::detect(const cv::Mat &input, std::vector< Marker > &detectedMarkers, CameraParameters camParams, float markerSizeMeters,
-                            bool setYPerpendicular) throw(cv::Exception) {
+                            bool setYPerpendicular)  {
     if ( camParams.CamSize!=input.size() && camParams.isValid() && markerSizeMeters>0){
         //must resize camera parameters if we want to compute properly marker poses
         CameraParameters cp_aux=camParams;
@@ -117,7 +117,7 @@ void MarkerDetector::detect(const cv::Mat &input, std::vector< Marker > &detecte
  *
  ************************************/
 void MarkerDetector::detect(const cv::Mat &input, vector< Marker > &detectedMarkers, Mat camMatrix, Mat distCoeff, float markerSizeMeters,
-                            bool setYPerpendicular) throw(cv::Exception) {
+                            bool setYPerpendicular)  {
 //omp_set_num_threads(1);
     // it must be a 3 channel image
     if (input.type() == CV_8UC3)
@@ -501,7 +501,7 @@ void  MarkerDetector::adpt_threshold_multi( const Mat &grey, std::vector<Mat> &o
  *
  *
  ************************************/
-void MarkerDetector::thresHold(int method, const Mat &grey, Mat &out, double param1, double param2) throw(cv::Exception) {
+void MarkerDetector::thresHold(int method, const Mat &grey, Mat &out, double param1, double param2)  {
 
     if (param1 == -1)
         param1 = _params._thresParam1;
@@ -543,7 +543,7 @@ void MarkerDetector::thresHold(int method, const Mat &grey, Mat &out, double par
  *
  *
  ************************************/
-bool MarkerDetector::warp(Mat &in, Mat &out, Size size, vector< Point2f > points) throw(cv::Exception) {
+bool MarkerDetector::warp(Mat &in, Mat &out, Size size, vector< Point2f > points)  {
 
     if (points.size() != 4)
         throw cv::Exception(9001, "point.size()!=4", "MarkerDetector::warp", __FILE__, __LINE__);
@@ -658,7 +658,7 @@ void setPointIntoImage(cv::Point &p, cv::Size s) {
  *
  *
  ************************************/
-bool MarkerDetector::warp_cylinder(Mat &in, Mat &out, Size size, MarkerCandidate &mcand) throw(cv::Exception) {
+bool MarkerDetector::warp_cylinder(Mat &in, Mat &out, Size size, MarkerCandidate &mcand)  {
 
     if (mcand.size() != 4)
         throw cv::Exception(9001, "point.size()!=4", "MarkerDetector::warp", __FILE__, __LINE__);
@@ -1120,17 +1120,17 @@ void MarkerDetector::findCornerMaxima(vector< cv::Point2f > &Corners, const cv::
 }
 
 
-void MarkerDetector::setMarkerLabeler(cv::Ptr<MarkerLabeler> detector)throw(cv::Exception){
+void MarkerDetector::setMarkerLabeler(cv::Ptr<MarkerLabeler> detector){
     markerIdDetector=detector;
     if (markerIdDetector->getBestInputSize()!=-1)setWarpSize(markerIdDetector->getBestInputSize());
 
 }
 
-void MarkerDetector::setDictionary(Dictionary::DICT_TYPES dict_type,float error_correction_rate)throw(cv::Exception){
+void MarkerDetector::setDictionary(Dictionary::DICT_TYPES dict_type,float error_correction_rate){
     markerIdDetector= MarkerLabeler::create(dict_type,error_correction_rate);
     if (markerIdDetector->getBestInputSize()!=-1)setWarpSize(markerIdDetector->getBestInputSize());
 }
-void MarkerDetector::setDictionary(string dict_type,float error_correction_rate)throw(cv::Exception){
+void MarkerDetector::setDictionary(string dict_type,float error_correction_rate){
     markerIdDetector= MarkerLabeler::create(Dictionary::getTypeFromString( dict_type),error_correction_rate);
     if (markerIdDetector->getBestInputSize()!=-1)setWarpSize(markerIdDetector->getBestInputSize());
 }

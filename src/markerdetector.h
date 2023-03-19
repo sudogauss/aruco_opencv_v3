@@ -115,8 +115,8 @@ public:
      * @param setYPerperdicular If set the Y axis will be perpendicular to the surface. Otherwise, it will be the Z axis
      * @return vector with the detected markers
      */
-    std::vector<aruco::Marker> detect(const cv::Mat &input) throw(cv::Exception);
-    std::vector<aruco::Marker> detect(const cv::Mat &input,const CameraParameters &camParams, float markerSizeMeters , bool setYPerperdicular = false) throw(cv::Exception);
+    std::vector<aruco::Marker> detect(const cv::Mat &input) ;
+    std::vector<aruco::Marker> detect(const cv::Mat &input,const CameraParameters &camParams, float markerSizeMeters , bool setYPerperdicular = false) ;
 
  /**Detects the markers in the image passed
      *
@@ -129,7 +129,7 @@ public:
      * @param setYPerperdicular If set the Y axis will be perpendicular to the surface. Otherwise, it will be the Z axis
      */
     void detect(const cv::Mat &input, std::vector< Marker > &detectedMarkers, CameraParameters camParams, float markerSizeMeters = -1,
-                bool setYPerperdicular = false) throw(cv::Exception);
+                bool setYPerperdicular = false) ;
 
 
     /**Detects the markers in the image passed
@@ -145,7 +145,7 @@ public:
      * @param setYPerperdicular If set the Y axis will be perpendicular to the surface. Otherwise, it will be the Z axis
      */
     void detect(const cv::Mat &input, std::vector< Marker > &detectedMarkers, cv::Mat camMatrix = cv::Mat(), cv::Mat distCoeff = cv::Mat(),
-                float markerSizeMeters = -1, bool setYPerperdicular = false) throw(cv::Exception);
+                float markerSizeMeters = -1, bool setYPerperdicular = false) ;
 
     /**Sets operating params
      */
@@ -163,7 +163,7 @@ public:
                      ARTOOLKITPLUSBCH,//
                      TAG16h5,TAG25h7,TAG25h9,TAG36h11,TAG36h10//APRIL TAGS DICIONARIES
     */
-    void setDictionary(std::string dict_type,float error_correction_rate=0)throw(cv::Exception);
+    void setDictionary(std::string dict_type,float error_correction_rate=0);
 
     /**
      * @brief setDictionary Specifies the dictionary you want to use for marker decoding
@@ -172,7 +172,7 @@ public:
      * an erroneous bit will result in discarding the marker. 1, mean full correction. The maximum number of bits that can be corrected depends on each ditionary.
      * We recommend using values from 0 to 0.5. (in general, this will allow up to 3 bits or correction).
      */
-    void setDictionary(Dictionary::DICT_TYPES dict_type,float error_correction_rate=0)throw(cv::Exception);
+    void setDictionary(Dictionary::DICT_TYPES dict_type,float error_correction_rate=0);
 
 
     /**
@@ -240,7 +240,7 @@ public:
      * @param max size of the contour to consider a possible marker as valid [0,1)
      *
      */
-    void setMinMaxSize(float min = 0.03, float max = 0.5) throw(cv::Exception){
+    void setMinMaxSize(float min = 0.03, float max = 0.5) {
     if (min <= 0 || min > 1)        throw cv::Exception(1, " min parameter out of range", "MarkerDetector::setMinMaxSize", __FILE__, __LINE__);
     if (max <= 0 || max > 1)        throw cv::Exception(1, " max parameter out of range", "MarkerDetector::setMinMaxSize", __FILE__, __LINE__);
     if (min > max)        throw cv::Exception(1, " min>max", "MarkerDetector::setMinMaxSize", __FILE__, __LINE__);
@@ -273,7 +273,7 @@ public:
      * Specifies the size for the canonical marker image. A big value makes the detection slower than a small value.
      * Minimun value is 10. Default value is 56.
      */
-    void setWarpSize(int val) throw(cv::Exception){
+    void setWarpSize(int val) {
         if (val < 10)
             throw cv::Exception(1, " invalid canonical image size", "MarkerDetector::setWarpSize", __FILE__, __LINE__);
         _params._markerWarpSize = val;
@@ -297,8 +297,8 @@ public:
      * @brief setMakerLabeler sets the labeler employed to analyze the squares and extract the inner binary code
      * @param detector
      */
-    void setMarkerLabeler(cv::Ptr<MarkerLabeler> detector)throw(cv::Exception);
-    cv::Ptr<MarkerLabeler>     getMarkerLabeler()throw(cv::Exception){ return markerIdDetector;}
+    void setMarkerLabeler(cv::Ptr<MarkerLabeler> detector);
+    cv::Ptr<MarkerLabeler>     getMarkerLabeler(){ return markerIdDetector;}
     // Represent a candidate to be a maker
     class MarkerCandidate : public Marker {
       public:
@@ -322,7 +322,7 @@ public:
     /**
      * Thesholds the passed image with the specified method.
      */
-    void thresHold(int method, const cv::Mat &grey, cv::Mat &thresImg, double param1 = -1, double param2 = -1) throw(cv::Exception);
+    void thresHold(int method, const cv::Mat &grey, cv::Mat &thresImg, double param1 = -1, double param2 = -1) ;
     /**A
      * */
     void  adpt_threshold_multi(const cv::Mat &grey, std::vector<cv::Mat> &out, double param1  , double param1_range , double param2,double param2_range=0 );
@@ -344,7 +344,7 @@ public:
      * @param points 4 corners of the marker in the image in
      * @return true if the operation succeed
      */
-    bool warp(cv::Mat &in, cv::Mat &out, cv::Size size, std::vector< cv::Point2f > points) throw(cv::Exception);
+    bool warp(cv::Mat &in, cv::Mat &out, cv::Size size, std::vector< cv::Point2f > points) ;
 
 
 
@@ -357,7 +357,7 @@ public:
 
 
   private:
-    bool warp_cylinder(cv::Mat &in, cv::Mat &out, cv::Size size, MarkerCandidate &mc) throw(cv::Exception);
+    bool warp_cylinder(cv::Mat &in, cv::Mat &out, cv::Size size, MarkerCandidate &mc) ;
     /**
     * Detection of candidates to be markers, i.e., rectangles.
     * This function returns in candidates all the rectangles found in a thresolded image
