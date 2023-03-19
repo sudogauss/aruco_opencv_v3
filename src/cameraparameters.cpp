@@ -133,7 +133,7 @@ void CameraParameters::saveToFile(string path, bool inXML)  {
 
 /**Adjust the parameters to the size of the image indicated
  */
-void CameraParameters::resize(cv::Size size)  {
+void CameraParameters::resize(const cv::Size& size)  {
     if (!isValid())
         throw cv::Exception(9007, "invalid object", "CameraParameters::resize", __FILE__, __LINE__);
     if (size == CamSize)
