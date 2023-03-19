@@ -82,7 +82,7 @@ class ARUCO_EXPORTS CameraParameters {
 
     /**Adjust the parameters to the size of the image indicated
      */
-    void resize(cosnt cv::Size& size);
+    void resize(const cv::Size& size);
 
     /**Returns the location of the camera in the reference system given by the rotation and translation vectors passed
      * NOT TESTED
