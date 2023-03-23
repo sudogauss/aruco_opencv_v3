@@ -45,7 +45,7 @@ MarkerMap::MarkerMap() { mInfoType = NONE; }
 *
 *
 */
-MarkerMap::MarkerMap(string filePath)  {
+MarkerMap::MarkerMap(const string& filePath)  {
     mInfoType = NONE;
     readFromFile(filePath);
 }
@@ -55,7 +55,7 @@ MarkerMap::MarkerMap(string filePath)  {
 *
 *
 */
-void MarkerMap::saveToFile(string sfile)  {
+void MarkerMap::saveToFile(const string& sfile)  {
 
     cv::FileStorage fs(sfile, cv::FileStorage::WRITE);
     saveToFile(fs);

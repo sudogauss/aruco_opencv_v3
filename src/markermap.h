@@ -80,7 +80,7 @@ public:
     /**Loads from file
      * @param filePath to the config file
      */
-    MarkerMap(string filePath);
+    MarkerMap(const string& filePath);
 
     /**Indicates if the corners are expressed in meters
      */
@@ -117,10 +117,10 @@ public:
 
     /**Saves the board info to a file
     */
-    void saveToFile(string sfile);
+    void saveToFile(const string& sfile);
     /**Reads board info from a file
     */
-    void readFromFile(string sfile);
+    void readFromFile(const string& sfile);
 
 
 
@@ -138,7 +138,7 @@ public:
         METERS = 1
     }; // indicates if the data in MakersInfo is expressed in meters or in pixels so as to do conversion internally
     //returns string indicating the dictionary
-    void setDictionary(std::string  d){dictionary=d;}
+    void setDictionary(const std::string&  d){dictionary=d;}
 
 
     // variable indicates if the data in MakersInfo is expressed in meters or in pixels so as to do conversion internally
