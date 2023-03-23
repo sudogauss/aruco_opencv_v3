@@ -57,7 +57,7 @@ MarkerMap::MarkerMap(const string& filePath)  {
 */
 void MarkerMap::saveToFile(const string& sfile)  {
 
-    cv::FileStorage fs(sfile, cv::FileStorage::WRITE);
+    cv::FileStorage fs(sfile, cv::FileStorage::Mode::WRITE);
     saveToFile(fs);
 }
 /**Saves the board info to a file
@@ -88,7 +88,7 @@ void MarkerMap::saveToFile(cv::FileStorage &fs)  {
 */
 void MarkerMap::readFromFile(const string& sfile)  {
     try {
-        cv::FileStorage fs(sfile, cv::FileStorage::READ);
+        cv::FileStorage fs(sfile, cv::FileStorage::Mode::READ);
         readFromFile(fs);
     } catch (std::exception &ex) {
         throw cv::Exception(81818, "MarkerMap::readFromFile", ex.what() + string(" file=)") + sfile, __FILE__, __LINE__);
