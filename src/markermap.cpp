@@ -86,7 +86,7 @@ void MarkerMap::saveToFile(cv::FileStorage &fs)  {
 *
 *
 */
-void MarkerMap::readFromFile(string sfile)  {
+void MarkerMap::readFromFile(const string& sfile)  {
     try {
         cv::FileStorage fs(sfile, cv::FileStorage::READ);
         readFromFile(fs);
