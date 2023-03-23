@@ -106,6 +106,10 @@ void MarkerMap::readFromFile(cv::FileStorage &fs)  {
     fs["aruco_bc_nmarkers"] >> aux;
     resize(aux);
     fs["aruco_bc_mInfoType"] >> mInfoType;
+
+    if (fs["aruco_bc_dict"].name()=="aruco_bc_dict")
+        fs["aruco_bc_dict"] >> dictionary;
+
     cv::FileNode markers = fs["aruco_bc_markers"];
     int i = 0;
     for (FileNodeIterator it = markers.begin(); it != markers.end(); ++it, i++) {
@@ -120,9 +124,6 @@ void MarkerMap::readFromFile(cv::FileStorage &fs)  {
             at(i).push_back(point);
         }
     }
-
-    if (fs["aruco_bc_dict"].name()=="aruco_bc_dict")
-     fs["aruco_bc_dict"] >> dictionary;
 
 }
 
