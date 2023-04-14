@@ -54,7 +54,7 @@ public:
     cv::Mat getMarkerImage_id(int id,int bit_size,bool addWaterMark=true);
 
     //used for boards
-    MarkerMap  createMarkerMap( cv::Size gridSize,int MarkerSize,int MarkerDistance, const std::vector<int> &Ids,bool chess_board=false);
+    MarkerMap  createMarkerMap( const cv::Size &gridSize,int MarkerSize,int MarkerDistance, const std::vector<int> &Ids,bool chess_board=false);
 
 
     static Dictionary loadPredefined(DICT_TYPES type) ;
