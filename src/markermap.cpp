@@ -305,7 +305,7 @@ MarkerMap   MarkerMap::convertToMeters(float markerSize_meters){
     BInfo.mInfoType = MarkerMap::METERS;
     // now, get the size of a pixel, and change scale
     float pixSize = markerSize_meters / float(markerSizePix);
-    cout << markerSize_meters << " " << float(markerSizePix) << " " << pixSize << endl;
+    cout << "[Aruco]: " << markerSize_meters << " " << float(markerSizePix) << " " << pixSize << endl;
     for (size_t i = 0; i < BInfo.size(); i++)
         for (int c = 0; c < 4; c++) {
             BInfo[i][c] *= pixSize;
